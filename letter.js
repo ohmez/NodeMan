@@ -1,5 +1,5 @@
-function Letter () {
-this.value = 'a' ;
+function Letter (val) {
+this.value = val ;
 this.hold = '-';
 this.guessed = false;
 this.return = function () {
@@ -15,3 +15,5 @@ this.check = function(letter) {
   } else {this.return();}
   };// end check function/key.
 };// end Letter funcion 
+
+Letter('a');
