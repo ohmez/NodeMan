@@ -3,17 +3,20 @@ this.value = val ;
 this.hold = '-';
 this.guessed = false;
 this.return = function () {
-  if(guessed) {
+  if(this.guessed) {
+console.log(this.value);
   return this.value;}
-  if(!guessed) {
+  if(!this.guessed) {
+console.log(this.hold);
   return this.hold;}
   }; // end return function/key.
 this.check = function(letter) {
   if(letter == this.value) {
+console.log('correct');
   this.guessed = true; 
   this.return();
   } else {this.return();}
   };// end check function/key.
-};// end Letter funcion 
+};// end Letter function 
 
-Letter('a');
+var a = new Letter('a');
