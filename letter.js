@@ -17,6 +17,10 @@ console.log('correct');
   this.return();
   } else {this.return();}
   };// end check function/key.
+  console.log(this);
 };// end Letter function 
 
-var a = new Letter('a');
+
+module.exports = new Letter();
+
+

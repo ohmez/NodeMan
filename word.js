@@ -1,6 +1,8 @@
-var letter = require('./letter.js');
+var Letter = require('./letter.js');
 
-function Word (word) {
+
+
+var Word = function (word) {
 this.word = word.trim();
 console.log(this.word);
 this.lettersArr = this.word.split("");
@@ -11,7 +13,8 @@ this.create = function () {
 	if(this.lettersArr[x] == ' ') {
 	this.created.push(' ');
 	} else {
-		this.created.push(new Letter(this.lettersArr[x]));
+		var a = new Letter(this.lettersArr[x])
+		this.created.push(a);
 		}
 	}
 }; // end create function/key.
@@ -39,4 +42,5 @@ this.checker = function (guess) {
 this.create(); // runs the create function upon new Word(); 
 };// end Word function 
 
-var banana = new Word('  banana cream pie  ');
+var test = process.argv[2];
+new Word(test);
