@@ -26,7 +26,8 @@ var Word = function (word) {
 		pop.push(this.created[x].return());
 		}
 		}// end loop
-		console.log(pop.join(" "));
+		// console.log(pop.join(" "));
+		return pop.join(" ");
 	};// end populate function/key
 		
 	this.checker = function (guess) {

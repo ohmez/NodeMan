@@ -10,7 +10,6 @@ var Letter = function (letter) {
       }; // end return function/key.
     this.check = function(letter) {
       if(letter == this.value) {
-    console.log('correct');
       this.guessed = true; 
       this.return();
       } else {this.return();}

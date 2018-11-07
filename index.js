@@ -1,10 +1,12 @@
 var Word = require('./word.js');
 var inquirer = require('inquirer');
 
-var totalGuesses = 0;
+var totalGuesses = 10;
 var words = ['banana', 'naruto', 'league of legends'];
 var rando = Math.floor(Math.random() * words.length);
 var guess = new Word(words[rando]);
+
+console.log(words);
 var totalCorrect = 0;
 var totalOptions = 0;
 var totalGuessed = 0;
@@ -15,33 +17,48 @@ totalOptions += 1;}
 console.log('below should be total # of letters to guess excluding spaces')
 console.log(totalOptions);
 function round () {
-inquirer.prompt([{type: 'input', message: 'Press any letter then enter to start NodeMan', name: 'guess'}])
+inquirer.prompt([{type: 'input', message: guess.populate() +'\nPress any letter then enter to make your guess', name: 'guess'}])
 .then(answers => {
-  var correct = false;
-  if(totalOptions <= totalGuessed && totalCorrect < totalOptions) {
-    console.log("You've ran out of Gueses \nTry again next time!");
-  }
+  check(answers);
   if(totalCorrect == totalOptions) {
     console.log("You've won it!");
+    console.log(guess.lettersArr.join(' '));
+    nextWord();
+    return;
   }
-for (x = 0; x < guess.created.length; x ++) {
-  if(guess.created[x].value == answers.guess) {
-    // if(!correct) {
-      totalCorrect += 1;
-      correct = true;
-    // }
-  
+  if (totalGuesses <= 0) {
+    console.log("You've ran out of Gueses \nTry again next time!");
+    console.log(guess.lettersArr.join(' '));
+  } else {
+    console.log((totalGuesses) + ' Guesses remaining.');
   }
-}
-totalGuessed += 1;
-if(!correct) {
-  totalGuesses += 1; 
-  console.log((totalOptions-totalGuesses) + ' Guesses remaining.');
-}
   guess.checker(answers.guess);
-if(totalOptions > totalGuessed) {
-  round();
-}
+  if(totalGuesses >= 1) {
+    round();
+  }
 });
-};
+};// end round function 
 round();
+function check (answers) {
+  var correct = false;
+  for (x = 0; x < guess.created.length; x ++) {
+    if(guess.created[x].value == answers.guess) {
+      if(!guess.created[x].guessed) {
+        totalCorrect += 1;
+        correct = true;
+        }
+        
+      }
+  }
+  totalGuessed += 1;
+  if(!correct) {
+    totalGuesses -= 1; 
+  }
+};
+function nextWord () {
+  words.splice(rando);
+  rando = Math.floor(Math.random() * words.length);
+  guess = new Word(words[rando]);
+  round();
+  guess.populate();
+};
