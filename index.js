@@ -17,6 +17,7 @@ totalOptions += 1;}
 console.log('below should be total # of letters to guess excluding spaces')
 console.log(totalOptions);
 function round () {
+  words.splice(rando,1);
 inquirer.prompt([{type: 'input', message: guess.populate() +'\nPress any letter then enter to make your guess', name: 'guess'}])
 .then(answers => {
   check(answers);
@@ -56,7 +57,6 @@ function check (answers) {
   }
 };
 function nextWord () {
-  words.splice(rando);
   rando = Math.floor(Math.random() * words.length);
   guess = new Word(words[rando]);
   round();
