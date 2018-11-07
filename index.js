@@ -1,28 +1,47 @@
 var Word = require('./word.js');
-var word = new Word();
 var inquirer = require('inquirer');
 
-var totalG = 10;
+var totalGuesses = 0;
 var words = ['banana', 'naruto', 'league of legends'];
 var rando = Math.floor(Math.random() * words.length);
-var guess = new word(words[rando]);
-var totalC = 0;
+var guess = new Word(words[rando]);
+var totalCorrect = 0;
+var totalOptions = 0;
+var totalGuessed = 0;
 for (x = 0; x < guess.created.length; x ++) {
   if(guess.created[x].value) {
-totalO += 1;}
+totalOptions += 1;}
 }
-
-inquirer.prompt([{type: 'input', message: 'Press any letter to start NodeMan', name: 'guess'}])
+console.log('below should be total # of letters to guess excluding spaces')
+console.log(totalOptions);
+function round () {
+inquirer.prompt([{type: 'input', message: 'Press any letter then enter to start NodeMan', name: 'guess'}])
 .then(answers => {
+  var correct = false;
+  if(totalOptions <= totalGuessed && totalCorrect < totalOptions) {
+    console.log("You've ran out of Gueses \nTry again next time!");
+  }
+  if(totalCorrect == totalOptions) {
+    console.log("You've won it!");
+  }
 for (x = 0; x < guess.created.length; x ++) {
   if(guess.created[x].value == answers.guess) {
-  totalC += 1;
+    // if(!correct) {
+      totalCorrect += 1;
+      correct = true;
+    // }
+  
   }
 }
-  
-if(totalC <= 0) {
-  totalG -= 1; 
-  console.log(totalG + ' Guesses remaining.');
+totalGuessed += 1;
+if(!correct) {
+  totalGuesses += 1; 
+  console.log((totalOptions-totalGuesses) + ' Guesses remaining.');
 }
   guess.checker(answers.guess);
+if(totalOptions > totalGuessed) {
+  round();
+}
 });
+};
+round();
