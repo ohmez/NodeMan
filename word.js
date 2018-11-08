@@ -3,9 +3,7 @@ var Letter = require('./letter.js');
 
 var Word = function (word) {
 	this.word = word.trim();
-	console.log(this.word);
 	this.lettersArr = this.word.split("");
-	console.log(this.lettersArr);
 	this.created = [];
 	this.create = function () {
 		for (x=0; x<this.lettersArr.length; x++) {

@@ -2,31 +2,28 @@ var Word = require('./word.js');
 var inquirer = require('inquirer');
 
 var totalGuesses = 10;
-var words = ['banana', 'naruto', 'league of legends'];
+var words = ['naruto', 'league of legends', 'death note', 'uzumaki', 'hinata', 'asta', 'urameshi'];
 var rando = Math.floor(Math.random() * words.length);
 var guess = new Word(words[rando]);
 words.splice(rando,1);
-console.log(words);
 var totalCorrect = 0;
 var totalOptions = 0;
-var totalGuessed = 0;
+
 for (x = 0; x < guess.created.length; x ++) {
   if(guess.created[x].value) {
 totalOptions += 1;}
 }
-console.log('below should be total # of letters to guess excluding spaces')
-console.log(totalOptions);
+
 function round () {
  inquirer.prompt([{type: 'input', message: guess.populate() +'\nPress any letter then enter to make your guess', name: 'guess'}])
 .then(answers => {
   check(answers);
   if(totalCorrect == totalOptions) {
-    console.log("You've won it!");
+    console.log("You've Guessed It!");
     console.log(guess.lettersArr.join(' '));
     nextWord();
     return;
-  }
-  if (totalGuesses <= 0) {
+  } else if (totalGuesses <= 0) {
     console.log("You've ran out of Gueses \nTry again next time!");
     console.log(guess.lettersArr.join(' '));
   } else {
@@ -50,15 +47,26 @@ function check (answers) {
         
       }
   }
-  totalGuessed += 1;
   if(!correct) {
     totalGuesses -= 1; 
   }
 };
 function nextWord () {
-  rando = Math.floor(Math.random() * words.length);
-  guess = new Word(words[rando]);
-  words.splice(rando,1);
-  round();
-  guess.populate();
+  if(words.length == 0) {
+    console.log("YOU'VE WON IT ALL!!!!!!! \nCONGRATS WINNER");
+    words = ['naruto', 'league of legends', 'death note', 'uzumaki', 'hinata', 'asta', 'urameshi'];
+    console.log('words: '+ '\n'+words.join('\n'));
+  } else {
+    totalCorrect = 0;
+    totalOptions = 0;
+    totalGuesses = 10;
+    rando = Math.floor(Math.random() * words.length);
+    guess = new Word(words[rando]);
+    words.splice(rando,1);
+    for (x = 0; x < guess.created.length; x ++) {
+      if(guess.created[x].value) {
+    totalOptions += 1;}
+    }
+    round();    
+  }
 };
