@@ -40,8 +40,12 @@ I was happy to find that a variable with a random number doesn't generate everyt
 This allowed me to splice the single word from the array everytime while still selecting a word at random from the array. 
 
 ### Screenshots
-![Start](screenshots/1st_word.png)
-![Next Word](screenshots/2nd_word.png)
+![Start](screenshots/1st_word.PNG)
+
+![Next Word](screenshots/2nd_word.PNG)
+
 ![Words With Spaces](screenshots/2nd_word_complete_spaces.PNG)
-![Incorrect Guesses](screenshots/incorrect_and_lose_screen.png)
-![End of Game](screenshots/end_of_game.png)
+
+![Incorrect Guesses](screenshots/incorrect_and_lose_screen.PNG)
+
+![End of Game](screenshots/end_of_game.PNG)
