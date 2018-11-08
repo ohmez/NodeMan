@@ -5,7 +5,7 @@ var totalGuesses = 10;
 var words = ['banana', 'naruto', 'league of legends'];
 var rando = Math.floor(Math.random() * words.length);
 var guess = new Word(words[rando]);
-
+words.splice(rando,1);
 console.log(words);
 var totalCorrect = 0;
 var totalOptions = 0;
@@ -17,8 +17,7 @@ totalOptions += 1;}
 console.log('below should be total # of letters to guess excluding spaces')
 console.log(totalOptions);
 function round () {
-  words.splice(rando,1);
-inquirer.prompt([{type: 'input', message: guess.populate() +'\nPress any letter then enter to make your guess', name: 'guess'}])
+ inquirer.prompt([{type: 'input', message: guess.populate() +'\nPress any letter then enter to make your guess', name: 'guess'}])
 .then(answers => {
   check(answers);
   if(totalCorrect == totalOptions) {
@@ -59,6 +58,7 @@ function check (answers) {
 function nextWord () {
   rando = Math.floor(Math.random() * words.length);
   guess = new Word(words[rando]);
+  words.splice(rando,1);
   round();
   guess.populate();
 };
